@@ -1,24 +1,39 @@
 const express = require('express');
 const app = express();
+const bodyparser = require('body-parser');
+
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: false }));
+
+const Post = require('../models/post');
+
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
-     res.setHeader("Access-Control-Allow-Header",
+    res.setHeader("Access-Control-Allow-Headers",
         "Origin, X-Requested-With,Content-type, Accept "
     );
-res.setHeader("Access-Control-Allow-Methods", 
-"GET, POST,PATCH,DELETE. OPTIONS"
-);
-next();
+    res.setHeader("Access-Control-Allow-Methods",
+        "GET, POST,PATCH,DELETE. OPTIONS"
+    );
 });
 
-app.post('/api/posts', (req, res, next) =>
-{
-    console.log)()
-})
+app.post('/api/posts', (req, res, next) => {
+    const post = new Post({
+        title: req.body.title,
+        content: req.body.content
+
+    });
+
+    console.log(post);
+    res.status(201).json({
+        message: "post send successfully"
+    });
+
+});
 
 
-app.use('/api/posts', (req, res, next) => {
+app.get('/api/posts', (req, res, next) => {
 
     const posts = [
 
