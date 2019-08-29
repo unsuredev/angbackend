@@ -1,10 +1,10 @@
 const express = require("express");
 
-const Post = require("../models/post");
+const Post = require("../routes/posts");
 
 const router = express.Router();
 
-router.post("", (req, res, next) => {
+router.post("/", (req, res, next) => {
   const post = new Post({
     title: req.body.title,
     content: req.body.content
@@ -28,7 +28,7 @@ router.put("/:id", (req, res, next) => {
   });
 });
 
-router.get("", (req, res, next) => {
+router.get("/", (req, res, next) => {
   Post.find().then(documents => {
     res.status(200).json({
       message: "Posts fetched successfully!",
