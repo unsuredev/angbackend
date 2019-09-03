@@ -1,10 +1,11 @@
+const path = require("path");
 const express = require("express"); //to import express
-const bodyparser = require("body-parser");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose"); //to access and handle mongoDb
 
 const app = express();
 
-const postRoutes = require("../routes/posts");
+const postsRoutes = require("../routes/posts");
 
 /*********************  my mongodb atlas connection link***************** */
 mongoose
@@ -12,15 +13,16 @@ mongoose
     "mongodb+srv://angblog:vNSBXJJWihXx9Ai6@cluster0-wepoo.mongodb.net/angblog?retryWrites=true&w=majority"
   )
   .then(() => {
-    console.log("connected to database ");
+    console.log("Connected to database!");
   })
-
   .catch(() => {
-    console.log();
+    console.log("Connection failed!");
   });
 
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/images", express.static(path.join("/backend/images")));
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -29,10 +31,11 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST,PUT, PATCH, DELETE, OPTIONS"
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
   );
   next();
 });
 
+app.use("/api/posts", postsRoutes);
+
 module.exports = app;
-app.use("/api/post", postRoutes);
