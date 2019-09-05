@@ -1,16 +1,17 @@
 const path = require("path");
 const express = require("express"); //to import express
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose"); //to access and handle mongoDb
+const mongoose = require("mongoose"); //to access and handle mongoDb 
 
 const app = express();
 
 const postsRoutes = require("../routes/posts");
+const usersRoutes = require("../routes/user");
 
 /*********************  my mongodb atlas connection link***************** */
 mongoose
   .connect(
-    "mongodb+srv://angblog:vNSBXJJWihXx9Ai6@cluster0-wepoo.mongodb.net/angblog?retryWrites=true&w=majority"
+    "mongodb+srv://angblog:vNSBXJJWihXx9Ai6@cluster0-wepoo.mongodb.net/angblog"
   )
   .then(() => {
     console.log("Connected to database!");
@@ -37,5 +38,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/posts", postsRoutes);
+app.use("/api/user", usersRoutes);
 
 module.exports = app;
