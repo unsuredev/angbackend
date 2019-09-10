@@ -11,7 +11,7 @@ const MIME_TYPE_MAP = {
   "image/jpeg": "jpg",
   "image/jpg": "jpg"
 };
- 
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const isValid = MIME_TYPE_MAP[file.mimetype];
@@ -63,7 +63,7 @@ router.put(
     let imagePath = req.body.imagePath;
     if (req.file) {
       const url = req.protocol + "://" + req.get("host");
-      imagePath = url + "/images/" + req.file.filename;
+      imagePath = url + "backend/images/" + req.file.filename;
     }
     const post = new Post({
       _id: req.body.id,
