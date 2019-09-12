@@ -11,7 +11,9 @@ const usersRoutes = require("../routes/user");
 /*********************  my mongodb atlas connection link***************** */
 mongoose
   .connect(
-    "mongodb+srv://angblog:vNSBXJJWihXx9Ai6@cluster0-wepoo.mongodb.net/angblog"
+    "mongodb+srv://angblog:" +
+      process.env.MONGO_ATLAS_PW +
+      "@cluster0-wepoo.mongodb.net/angblog"
   )
   .then(() => {
     console.log("Connected to database!");
@@ -28,17 +30,12 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PATCH, PUT, DELETE, OPTIONS"
   );
-
-  res.setHeader("Access-Control-Allow-Credentials", "false");
-
-
-
   next();
 });
 
