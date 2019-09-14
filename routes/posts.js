@@ -1,6 +1,4 @@
 const express = require("express");
-
-const Post = require("../models/post");
 const checkAuth = require("../middleware/check-auth");
 
 const extractFiles = require("../middleware/check-auth");
