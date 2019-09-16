@@ -3,10 +3,10 @@ const express = require("express"); //to import express
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose"); //to access and handle mongoDb
 
-const app = express();
-
 const postsRoutes = require("../routes/posts");
 const usersRoutes = require("../routes/user");
+
+const app = express();
 
 /*********************  my mongodb atlas connection link***************** */
 mongoose
@@ -24,7 +24,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images", express.static(path.join("/backend/images")));
+app.use("/images", express.static(path.join("backend/images")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

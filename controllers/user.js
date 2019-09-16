@@ -28,7 +28,8 @@ exports.createUser = (req, res, next) => {
 
 exports.userLogin = (req, res, next) => {
   let fetchedUser;
-  User.findOne({ email: req.body.email })
+  user
+    .findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
         return res.status(401).json({
