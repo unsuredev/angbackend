@@ -9,6 +9,7 @@ exports.createUser = (req, res, next) => {
       email: req.body.email,
       password: hash
     });
+
     user
       .save()
       .then(result => {
