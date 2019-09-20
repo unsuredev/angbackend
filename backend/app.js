@@ -2,7 +2,6 @@ const path = require("path");
 const express = require("express"); //to import express
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose"); //to access and handle mongoDb
-const jwt = require("jsonwebtoken");
 const postsRoutes = require("../routes/posts");
 const usersRoutes = require("../routes/user");
 
