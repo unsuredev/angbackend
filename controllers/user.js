@@ -9,7 +9,6 @@ exports.createUser = (req, res, next) => {
       email: req.body.email,
       password: hash
     });
-
     user
       .save()
       .then(result => {
@@ -29,8 +28,7 @@ exports.createUser = (req, res, next) => {
 
 exports.userLogin = (req, res, next) => {
   let fetchedUser;
-  user
-    .findOne({ email: req.body.email })
+  User.findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
         return res.status(401).json({
